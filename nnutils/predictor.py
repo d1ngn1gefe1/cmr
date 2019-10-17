@@ -169,7 +169,8 @@ class MeshPredictor(object):
             # B x H x W x 2
             self.uv_flows = uv_flows.permute(0, 2, 3, 1)
             self.uv_images = torch.nn.functional.grid_sample(self.imgs,
-                                                             self.uv_flows)
+                                                             self.uv_flows,
+                                                             align_corners=True)
         else:
             self.textures = None
 

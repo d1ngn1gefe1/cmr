@@ -21,7 +21,7 @@ def mask_dt_loss(proj_verts, dist_transf):
     # Reshape into B x 1 x N x 2
     sample_grid = proj_verts.unsqueeze(1)
     # B x 1 x 1 x N
-    dist_transf = torch.nn.functional.grid_sample(dist_transf, sample_grid, padding_mode='border')
+    dist_transf = torch.nn.functional.grid_sample(dist_transf, sample_grid, padding_mode='border', align_corners=True)
     return dist_transf.mean()
 
 
@@ -39,7 +39,7 @@ def texture_dt_loss(texture_flow, dist_transf, vis_rend=None, cams=None, verts=N
     F = texture_flow.size(1)
     flow_grid = texture_flow.view(-1, F, T * T, 2)
     # B x 1 x F x T*T
-    dist_transf = torch.nn.functional.grid_sample(dist_transf, flow_grid)
+    dist_transf = torch.nn.functional.grid_sample(dist_transf, flow_grid, align_corners=True)
 
     if vis_rend is not None:
         # Visualize the error!

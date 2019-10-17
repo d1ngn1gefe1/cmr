@@ -233,7 +233,7 @@ class ShapeTrainer(train_utils.Trainer):
             uv_flows = self.model.texture_predictor.uvimage_pred
             # B x H x W x 2
             uv_flows = uv_flows.permute(0, 2, 3, 1)
-            uv_images = torch.nn.functional.grid_sample(self.imgs, uv_flows)
+            uv_images = torch.nn.functional.grid_sample(self.imgs, uv_flows, align_corners=True)
 
         num_show = min(2, self.opts.batch_size)
         show_uv_imgs = []

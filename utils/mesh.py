@@ -13,7 +13,7 @@ import meshzoo
 def create_sphere(n_subdivide=3):
     # 3 makes 642 verts, 1280 faces,
     # 4 makes 2562 verts, 5120 faces
-    verts, faces = meshzoo.iso_sphere(n_subdivide)
+    verts, faces = meshzoo.icosa_sphere(2**n_subdivide)
     return verts, faces
 
 
